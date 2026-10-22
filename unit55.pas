@@ -1,0 +1,140 @@
+unit unit55;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls;
+
+type
+
+  { TForm1 }
+
+  TForm1 = class(TForm)
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Memo1: TMemo;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+  private
+
+  public
+
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.lfm}
+
+{ TForm1 }
+
+ procedure TForm1.Button1Click(Sender: TObject);
+var
+  giorno, euro, totale: integer;
+begin
+  Randomize;
+  Memo1.Clear;
+  totale := 0;
+
+  // Ciclo FOR: giorno da 1 a 7
+  for giorno := 1 to 7 do
+  begin
+    // Euro a caso da 1 a 5
+    euro := Random(5) + 1;
+
+    // Aggiungi euro al totale
+    totale := totale + euro;
+
+    // Scrivi nel Memo: Giorno 1: +3 euro
+    Memo1.Lines.Add('Giorno ' + IntToStr(giorno) + ': +' + IntToStr(euro) + ' euro');
+  end;
+
+  // Dopo il ciclo, scrivi il totale della settimana
+  Memo1.Lines.Add('In una settimana: ' + IntToStr(totale) + ' euro');
+end;
+
+ procedure TForm1.Button2Click(Sender: TObject);
+ var
+   giorni, euro, totale, prezzo: integer;
+ begin
+   Randomize;
+   prezzo := StrToInt(Edit2.Text);
+   Memo1.Clear;
+   totale := 0;
+   giorni := 0;
+
+   // Ciclo WHILE: finché il totale è minore del prezzo
+   while totale < prezzo do
+   begin
+     // Euro a caso da 1 a 5
+     euro := Random(5) + 1;
+
+     // Aggiungi euro al totale
+     totale := totale + euro;
+
+     // Conta un giorno in più
+     giorni := giorni + 1;
+
+     // (Opzionale) Scrivi il progresso nel Memo
+     Memo1.Lines.Add('Giorno ' + IntToStr(giorni) + ': ho ' + IntToStr(totale) + ' euro');
+   end;
+
+   // Dopo il ciclo, scrivi quanti giorni servono
+   Memo1.Lines.Add('Per ' + Edit1.Text + ' ti servono ' + IntToStr(giorni) + ' giorni');
+ end;
+
+ procedure TForm1.Button3Click(Sender: TObject);
+ var
+   giorni, euro, totale, prezzo: integer;
+ begin
+   Randomize;
+   prezzo := StrToInt(Edit2.Text);
+   Memo1.Clear;
+   totale := 0;
+   giorni := 0;
+
+   // Ciclo WHILE: finché il totale è minore del prezzo
+   while totale < prezzo do
+   begin
+     // Euro a caso da 1 a 5
+     euro := Random(5) + 1;
+
+     // Aggiungi euro al totale
+     totale := totale + euro;
+
+     // Conta un giorno in più
+     giorni := giorni + 1;
+
+     // Controllo paghetta: se è sabato (giorno divisibile per 7)
+     if giorni mod 7 = 0 then
+     begin
+       totale := totale + 10;
+       Memo1.Lines.Add('Sabato: paghetta +10 euro!');
+     end;
+
+     // Scrivi il progresso nel Memo
+     Memo1.Lines.Add('Giorno ' + IntToStr(giorni) + ': ho ' + IntToStr(totale) + ' euro');
+   end;
+
+   // Dopo il ciclo, scrivi quanti giorni servono
+   Memo1.Lines.Add('Per ' + Edit1.Text + ' ti servono ' + IntToStr(giorni) + ' giorni');
+ end;
+
+
+
+
+
+
+
+end.
+
